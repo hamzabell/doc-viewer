@@ -78,11 +78,12 @@ function App() {
     const getFileBinary = () => {
       axios
         .post(
-          `https://accounts.accesscontrol.windows.net/d5ae80e3-e35d-41ff-b429-15367567c75f/tokens/OAuth/2`,
+          `/d5ae80e3-e35d-41ff-b429-15367567c75f/tokens/OAuth/2`,
           getFormData(),
           {
             headers: {
               "Content-Type": "application/x-www-form-urlencoded",
+              "Access-Control-Allow-Origin": true,
               Cookie:
                 "esctx=AQABAAAAAAD--DLA3VO7QrddgJg7WevrUuTQVW10VWWiHWAMsZMqRz3aOzuQprB2bWzydXGkQsQVBjc50knDWozB8BEBiFRTccfqsB4xiQ7N5pxDkVhcy_StN1qu0_3iRt6HCcOGPjY_mm4SRe9GXbDxZ_h8DEQcwHwrUrQsfssUfL_omOfYSMcWzb3jczD7r8BOJiQOsLsgAA; fpc=AkhMlY5GnTJIoi9Hi05_dt1oddPMAgAAAJT7xNkOAAAA; stsservicecookie=estsfd; x-ms-gateway-slice=estsfd",
             },
