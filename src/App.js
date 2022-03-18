@@ -12,13 +12,19 @@ function App() {
 
   const getFormData = () => {
     const formData = new FormData();
-    formData.append("client_id", process.env.REACT_APP_client_id);
-    formData.append("client_secret", process.env.REACT_APP_client_secret);
+    formData.append(
+      "client_id",
+      "ec13abb1-a745-4181-b952-1d0541737916@d5ae80e3-e35d-41ff-b429-15367567c75f"
+    );
+    formData.append(
+      "client_secret",
+      "4qUisnKO8mUDgYJNsmjauAeriHgaT7gunRov6hU/8Qw="
+    );
     formData.append(
       "resource",
-      `${process.env.REACT_APP_principal}/${process.env.REACT_APP_sharepoint_tenant}@${process.env.REACT_APP_tenant_id}`
+      `00000003-0000-0ff1-ce00-000000000000/wwllab045.sharepoint.com@d5ae80e3-e35d-41ff-b429-15367567c75f`
     );
-    formData.append("grant_type", process.env.REACT_APP_grant_type);
+    formData.append("grant_type", "client_credentials");
 
     return formData;
   };
@@ -34,7 +40,7 @@ function App() {
     if (doc_url !== null) {
       axios
         .get(
-          `https://${process.env.REACT_APP_sharepoint_tenant}/_api/web/GetFileByServerRelativeUrl('${doc_url}')/$value`,
+          `https://wwllab045.sharepoint.com/_api/web/GetFileByServerRelativeUrl('${doc_url}')/$value`,
           {
             headers: headers,
             responseType: "blob",
@@ -72,12 +78,13 @@ function App() {
     const getFileBinary = () => {
       axios
         .post(
-          `${process.env.REACT_APP_tenant_id}/tokens/OAuth/2/`,
+          `d5ae80e3-e35d-41ff-b429-15367567c75f/tokens/OAuth/2/`,
           getFormData(),
           {
             headers: {
               "Content-Type": "application/x-www-form-urlencoded",
-              Cookie: process.env.REACT_APP_cookie,
+              Cookie:
+                "esctx=AQABAAAAAAD--DLA3VO7QrddgJg7WevrUuTQVW10VWWiHWAMsZMqRz3aOzuQprB2bWzydXGkQsQVBjc50knDWozB8BEBiFRTccfqsB4xiQ7N5pxDkVhcy_StN1qu0_3iRt6HCcOGPjY_mm4SRe9GXbDxZ_h8DEQcwHwrUrQsfssUfL_omOfYSMcWzb3jczD7r8BOJiQOsLsgAA; fpc=AkhMlY5GnTJIoi9Hi05_dt1oddPMAgAAAJT7xNkOAAAA; stsservicecookie=estsfd; x-ms-gateway-slice=estsfd",
             },
           }
         )
