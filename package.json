@@ -20,7 +20,7 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
-  "proxy": "https://accounts.accesscontrol.windows.net/",
+  "proxy": "https://accounts.accesscontrol.windows.net",
   "eslintConfig": {
     "extends": [
       "react-app",

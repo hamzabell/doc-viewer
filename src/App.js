@@ -78,7 +78,7 @@ function App() {
     const getFileBinary = () => {
       axios
         .post(
-          `d5ae80e3-e35d-41ff-b429-15367567c75f/tokens/OAuth/2/`,
+          `https://accounts.accesscontrol.windows.net/d5ae80e3-e35d-41ff-b429-15367567c75f/tokens/OAuth/2`,
           getFormData(),
           {
             headers: {
