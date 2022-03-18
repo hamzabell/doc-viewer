@@ -2,7 +2,6 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import { BeatLoader } from "react-spinners";
 import "./App.css";
-import data from "./credentials.json";
 import infoLogo from "./assets/info.svg";
 import error from "./assets/errror.svg";
 
@@ -13,13 +12,13 @@ function App() {
 
   const getFormData = () => {
     const formData = new FormData();
-    formData.append("client_id", data.client_id);
-    formData.append("client_secret", data.client_secret);
+    formData.append("client_id", process.env.REACT_APP_client_id);
+    formData.append("client_secret", process.env.REACT_APP_client_secret);
     formData.append(
       "resource",
-      `${data.principal}/${data.sharepoint_tenant}@${data.tenant_id}`
+      `${process.env.REACT_APP_principal}/${process.env.REACT_APP_sharepoint_tenant}@${process.env.REACT_APP_tenant_id}`
     );
-    formData.append("grant_type", data.grant_type);
+    formData.append("grant_type", process.env.REACT_APP_grant_type);
 
     return formData;
   };
@@ -35,7 +34,7 @@ function App() {
     if (doc_url !== null) {
       axios
         .get(
-          `https://${data.sharepoint_tenant}/_api/web/GetFileByServerRelativeUrl('${doc_url}')/$value`,
+          `https://${process.env.REACT_APP_sharepoint_tenant}/_api/web/GetFileByServerRelativeUrl('${doc_url}')/$value`,
           {
             headers: headers,
             responseType: "blob",
@@ -71,12 +70,16 @@ function App() {
 
   const getFileBinary = () => {
     axios
-      .post(`${data.tenant_id}/tokens/OAuth/2/`, getFormData(), {
-        headers: {
-          "Content-Type": "application/x-www-form-urlencoded",
-          Cookie: data.cookie,
-        },
-      })
+      .post(
+        `${process.env.REACT_APP_tenant_id}/tokens/OAuth/2/`,
+        getFormData(),
+        {
+          headers: {
+            "Content-Type": "application/x-www-form-urlencoded",
+            Cookie: process.env.REACT_APP_cookie,
+          },
+        }
+      )
       .then((res) => {
         setLoading(true);
         getFile(res.data.access_token);
