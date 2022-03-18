@@ -94,7 +94,7 @@ function App() {
         })
         .catch((err) => {
           setLoading(false);
-          setHasDoc(false);
+          setHasDoc(true);
           setHasError(true);
         });
     };
