@@ -68,30 +68,30 @@ function App() {
     }
   };
 
-  const getFileBinary = () => {
-    axios
-      .post(
-        `${process.env.REACT_APP_tenant_id}/tokens/OAuth/2/`,
-        getFormData(),
-        {
-          headers: {
-            "Content-Type": "application/x-www-form-urlencoded",
-            Cookie: process.env.REACT_APP_cookie,
-          },
-        }
-      )
-      .then((res) => {
-        setLoading(true);
-        getFile(res.data.access_token);
-      })
-      .catch((err) => {
-        setLoading(false);
-        setHasDoc(false);
-        setHasError(true);
-      });
-  };
-
   useEffect(() => {
+    const getFileBinary = () => {
+      axios
+        .post(
+          `${process.env.REACT_APP_tenant_id}/tokens/OAuth/2/`,
+          getFormData(),
+          {
+            headers: {
+              "Content-Type": "application/x-www-form-urlencoded",
+              Cookie: process.env.REACT_APP_cookie,
+            },
+          }
+        )
+        .then((res) => {
+          setLoading(true);
+          getFile(res.data.access_token);
+        })
+        .catch((err) => {
+          setLoading(false);
+          setHasDoc(false);
+          setHasError(true);
+        });
+    };
+
     getFileBinary();
   }, []);
 
