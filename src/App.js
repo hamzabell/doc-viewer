@@ -28,6 +28,7 @@ function App() {
           });
           const wrapper = document.getElementById("wrapper");
           const iframe = document.createElement("iframe");
+          
           iframe.name = "printf";
           iframe.src = URL.createObjectURL(blobContent);
           iframe.style.width = "100%";
